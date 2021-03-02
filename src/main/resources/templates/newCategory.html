@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+ <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+   <div>
+     <form  method='POST' th:action="@{/create}" th:object= ${category}>
+      <h1>Add Category</h1>
+      <hr>
+      <label for="name"><b>Name</b></label>
+        <input type="text" placeholder="Name" name="name" required>      
+      <br>
+      <button type="submit">Add</button>
+    </form>  
+  </div>
+</body>
+</html>
