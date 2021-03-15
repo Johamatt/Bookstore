@@ -1,5 +1,4 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
@@ -42,6 +41,12 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<header>
+  <h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+  <form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign out"/>
+  </form>
+</header>
 <div class=listPage>
   <h1>Books</h1>
   <hr>
@@ -49,12 +54,13 @@ $(document).ready(function(){
     <tbody>
     <thead>
 	  <tr>
-	  	<td>Author</td>
-	  	<td>Title</td>
-	  	<td>ISBN</td>
-	  	<td>Year</td>
-	  	<td>Price</td>
-	  	<td>Category</td>
+	  	<th>Author</th>
+	  	<th>Title</th>
+	  	<th>ISBN</th>
+	  	<th>Year</th>
+	  	<th>Price</th>
+	  	<th>Category</th>
+	  	<th sec:authorize="hasRole('ROLE_ADMIN')"> </th>
 	  </tr>
     </thead>
       <tr th:each = "book : ${books}">
@@ -64,9 +70,10 @@ $(document).ready(function(){
         <td th:text="${book.year}"/>	
         <td th:text="${book.price}"/>
         <td th:text="${book.category.name}"/>	
-		<td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+		<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-xs btn-danger">Delete</a></td>    	
+		
      </tbody>
-  </table> 
+  </table>
 </div> 
   
   <div class=addPage>

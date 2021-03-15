@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+
+
 @Entity
 public class Category {
 
@@ -20,6 +22,7 @@ public class Category {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
 	private List<Book> books;
+	
 
 	public long getCategoryid() {
 		return categoryid;
