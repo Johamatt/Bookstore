@@ -60,7 +60,7 @@ $(document).ready(function(){
 	  	<th>Year</th>
 	  	<th>Price</th>
 	  	<th>Category</th>
-	  	<th sec:authorize="hasRole('ROLE_ADMIN')"> </th>
+	  	<th sec:authorize="hasAuthority('ADMIN')"> </th>
 	  </tr>
     </thead>
       <tr th:each = "book : ${books}">
@@ -70,7 +70,7 @@ $(document).ready(function(){
         <td th:text="${book.year}"/>	
         <td th:text="${book.price}"/>
         <td th:text="${book.category.name}"/>	
-		<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-xs btn-danger">Delete</a></td>    	
+		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-xs btn-danger">Delete</a></td>    	
 		
      </tbody>
   </table>
